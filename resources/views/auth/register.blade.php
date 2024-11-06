@@ -1,4 +1,4 @@
-@extends('Auth.master')
+@extends('auth.master')
 @section('title', 'ثبت نام')
 @section('content')
     <section class="bg-white">
