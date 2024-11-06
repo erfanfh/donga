@@ -23,13 +23,37 @@
                         ورود
                     </h1>
 
-                    <form action="#" class="mt-8 grid grid-cols-6 gap-6">
+                    @if(session()->has('error'))
+                        <div class="bg-red-50 mt-5 border-s-4 border-red-500 p-4 dark:bg-red-800/30" role="alert" tabindex="-1"
+                             aria-labelledby="hs-bordered-red-style-label">
+                            <div class="flex">
+                                <div class="ms-3">
+                                    <h3 id="hs-bordered-red-style-label"
+                                        class="text-gray-800 font-semibold dark:text-white">
+                                        خطا
+                                    </h3>
+                                    <p class="text-sm text-gray-700 dark:text-neutral-400">
+                                        {{ session('error') }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+
+                    <form action="{{ route('login.post') }}" method="POST" class="mt-8 grid grid-cols-6 gap-6">
+                        @csrf
                         <div class="col-span-6">
                             <label for="Email" class="block text-sm font-medium text-gray-700"> ایمیل </label>
 
                             <div class="mt-2">
-                                <input id="email" name="email" type="email" autocomplete="email" required
-                                       class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
+                                <input id="Email" name="email" type="text" autocomplete="email" dir="ltr"
+                                       class="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
+                            </div>
+
+                            <div class="text-red-700">
+                                @error('email')
+                                {{ $message }}
+                                @enderror
                             </div>
                         </div>
 
@@ -37,11 +61,16 @@
                             <label for="Password" class="block text-sm font-medium text-gray-700"> رمز عبور </label>
 
                             <div class="mt-2">
-                                <input id="email" name="email" type="email" autocomplete="email" required
-                                       class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
+                                <input id="Password" name="password" type="password" autocomplete="password" dir="ltr"
+                                       class="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
+                            </div>
+
+                            <div class="text-red-700">
+                                @error('password')
+                                {{ $message }}
+                                @enderror
                             </div>
                         </div>
-
 
                         <div class="col-span-6 sm:flex sm:items-center sm:gap-4">
                             <button

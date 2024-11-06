@@ -5,8 +5,8 @@
         </label>
 
         <div class="mt-2">
-            <input id="email" wire:model="firstName" type="text" autocomplete="email"
-                   class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
+            <input id="FirstName" wire:model="firstName" type="text"
+                   class="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
         </div>
         <div class="text-red-700">
             @error('firstName')
@@ -21,8 +21,8 @@
         </label>
 
         <div class="mt-2">
-            <input id="email" wire:model="lastName" type="text" autocomplete="email"
-                   class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
+            <input id="LastName" wire:model="lastName" type="text"
+                   class="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
         </div>
         <div class="text-red-700">
             @error('lastName')
@@ -35,8 +35,8 @@
         <label for="Email" class="block text-sm font-medium text-gray-700"> ایمیل </label>
 
         <div class="mt-2">
-            <input id="email" wire:model.live="email" type="email" autocomplete="email"
-                   class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
+            <input id="Email" wire:model.live="email" type="text" dir="ltr"
+                   class="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
         </div>
         <div class="text-red-700">
             @error('email')
@@ -49,8 +49,8 @@
         <label for="Password" class="block text-sm font-medium text-gray-700"> رمز عبور </label>
 
         <div class="mt-2">
-            <input id="email" wire:model.live="password" type="password" autocomplete="email"
-                   class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
+            <input id="Password" wire:model.live="password" type="password" dir="ltr"
+                   class="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
         </div>
         <div class="text-red-700">
             @error('password')
@@ -65,8 +65,8 @@
         </label>
 
         <div class="mt-2">
-            <input id="email" wire:model.live="password_confirmation" type="password" autocomplete="email"
-                   class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
+            <input id="PasswordConfirmation" wire:model.live="password_confirmation" type="password" dir="ltr"
+                   class="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
         </div>
         <div class="text-red-700">
             @error('password_confirmation')

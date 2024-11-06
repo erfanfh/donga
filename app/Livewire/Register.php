@@ -3,7 +3,6 @@
 namespace App\Livewire;
 
 use App\Actions\User\CreateUserAction;
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use Livewire\Attributes\Validate;
@@ -11,13 +10,13 @@ use Livewire\Component;
 
 class Register extends Component
 {
-    #[Validate(['required', 'min:5', 'max:255'], message: [
+    #[Validate(['required', 'min:3', 'max:255'], message: [
         'required' => 'نام خود را وارد کنید.',
         'min' => 'نام باید بیشتر از 5 حرف باشد.',
         'max' => 'نام باید کمتر از 255 حرف باشد.'
     ])]
     public $firstName;
-    #[Validate(['required', 'min:5', 'max:255'], message: [
+    #[Validate(['required', 'min:3', 'max:255'], message: [
         'required' => 'نام خانوادگی خود را وارد کنید.',
         'min' => 'نام خانوادگی باید بیشتر از 5 حرف باشد.',
         'max' => 'نام خانوادگی باید کمتر از 255 حرف باشد.'
@@ -46,14 +45,18 @@ class Register extends Component
     {
         $this->validateOnly('password');
     }
-    public function register(CreateUserAction $createUser): void
+
+    public function register(CreateUserAction $createUser): null
     {
         $validated = $this->validate();
 
         $user = $createUser->execute($validated);
 
         Auth::login($user);
+
+        return $this->redirect(route('home'));
     }
+
     public function render(): View
     {
         return view('livewire.register');
