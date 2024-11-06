@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\URL;
 class UserMustBeVerified
 {
     /**
+     * User must be verified if not redirect to the verification page
+     *
      * @param \Illuminate\Http\Request $request
      * @param \Closure $next
      *

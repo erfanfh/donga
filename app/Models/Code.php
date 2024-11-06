@@ -7,6 +7,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Code extends Model
 {
+    /**
+     * The attributes that are mass assignable
+     *
+     * @var string[]
+     */
     protected $fillable = ['code', 'expired_at'];
 
     /**

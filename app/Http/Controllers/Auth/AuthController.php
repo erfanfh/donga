@@ -17,7 +17,7 @@ use Illuminate\View\View;
 class AuthController extends Controller
 {
     /**
-     * Login an unauthenticated user
+     * Call an action to login an unauthenticated user
      *
      * @param \App\Http\Requests\UserLoginRequest $request
      * @param \App\Actions\Auth\ValidateLoginFormAction $validateLoginForm
@@ -132,7 +132,14 @@ class AuthController extends Controller
         return redirect()->route('verify');
     }
 
-    public function changeEmail(CreateVerificationCodeAction $createVerificationCode, SendVerificationMailAction $sendVerificationMail)
+    /**
+     * show change the user's email for validation page
+     * @param \App\Actions\Auth\CreateVerificationCodeAction $createVerificationCode
+     * @param \App\Actions\Auth\SendVerificationMailAction $sendVerificationMail
+     *
+     * @return \Illuminate\View\View|\Illuminate\Http\RedirectResponse
+     */
+    public function changeEmail(CreateVerificationCodeAction $createVerificationCode, SendVerificationMailAction $sendVerificationMail) : View|RedirectResponse
     {
         if (empty(auth()->user()->codes->all())) {
             $code = $createVerificationCode->execute();
@@ -151,7 +158,17 @@ class AuthController extends Controller
         return view('verification.changeEmail');
     }
 
-    public function changeEmailPost(Request $request , SendVerificationMailAction $sendVerificationMail, CreateVerificationCodeAction $createVerificationCode, ChangeUserEmailAction $changeUserEmail)
+    /**
+     * Validate the request for change the email
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Actions\Auth\SendVerificationMailAction $sendVerificationMail
+     * @param \App\Actions\Auth\CreateVerificationCodeAction $createVerificationCode
+     * @param \App\Actions\User\ChangeUserEmailAction $changeUserEmail
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function changeEmailPost(Request $request , SendVerificationMailAction $sendVerificationMail, CreateVerificationCodeAction $createVerificationCode, ChangeUserEmailAction $changeUserEmail) : RedirectResponse
     {
         $request->validate([
             'email' => 'required|email|max:255',

@@ -57,6 +57,11 @@ class User extends Authenticatable
         return $this->hasMany(Code::class);
     }
 
+    /**
+     * Set name = firstName + lastiName
+     *
+     * @return string
+     */
     public function getNameAttribute(): string
     {
         return $this->firstName . " " . $this->lastName;

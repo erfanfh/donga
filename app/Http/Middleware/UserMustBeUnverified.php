@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 class UserMustBeUnverified
 {
     /**
+     * User must be unverified if not redirect to the home page
      * @param \Illuminate\Http\Request $request
      * @param \Closure $next
      *
