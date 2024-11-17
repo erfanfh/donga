@@ -2,8 +2,6 @@
 
 namespace App\Actions\Auth;
 
-use App\Models\Code;
-
 class CreateVerificationCodeAction
 {
     /**

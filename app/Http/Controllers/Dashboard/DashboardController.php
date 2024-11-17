@@ -3,11 +3,16 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class DashboardController extends Controller
 {
-    public function index()
+    /**
+     * Show dashboard view
+     *
+     * @return \Illuminate\View\View
+     */
+    public function index(): View
     {
         return view('dashboard.dashboard');
     }
