@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('people', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
             $table->unsignedBigInteger('meeting_id');
             $table->foreign('meeting_id')->references('id')->on('meetings')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('name');
+            $table->unsignedInteger('balance')->default(0);
             $table->timestamps();
         });
     }

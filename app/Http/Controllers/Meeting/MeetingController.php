@@ -6,6 +6,7 @@ use App\Actions\Meeting\StoreNewMeetingAction;
 use App\Actions\Meeting\UpdateMeetingNameAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreMeetingRequest;
+use App\Http\Requests\StoreUserPaymentRequest;
 use App\Models\Meeting;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -35,7 +36,7 @@ class MeetingController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function show(Meeting $meeting) : View
+    public function show(Meeting $meeting): View
     {
         return view('meeting.show', compact('meeting'));
     }
@@ -49,7 +50,7 @@ class MeetingController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function updateName(Request $request, Meeting $meeting , UpdateMeetingNameAction $updateMeetingName) : RedirectResponse
+    public function updateName(Request $request, Meeting $meeting, UpdateMeetingNameAction $updateMeetingName): RedirectResponse
     {
         $request->validate(
             ['title' => 'required'],
@@ -59,5 +60,10 @@ class MeetingController extends Controller
         $updateMeetingName->execute($meeting, $request->title);
 
         return redirect()->route('meetings.show', compact('meeting'));
+    }
+
+    public function userPay(StoreUserPaymentRequest $request)
+    {
+        //
     }
 }
