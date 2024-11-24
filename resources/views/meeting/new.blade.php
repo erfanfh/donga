@@ -98,7 +98,7 @@
             افراد شرکت کننده</label>
         <div id="tag-container"
              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-            <input id="tag-input" type="text" name="people"
+            <input id="tag-input" type="text" name="participants"
                    class="outline-none border-none flex-grow p-1 bg-transparent"
                    placeholder="تایپ کنید و با tab جدا کنید"
                    autocomplete="off">
@@ -129,7 +129,7 @@
                     <li> {{ $message }} </li> @enderror
                     @error('end_time')
                     <li> {{ $message }} </li> @enderror
-                    @error('people')
+                    @error('participants')
                     <li> {{ $message }} </li> @enderror
                 </ul>
             </div>

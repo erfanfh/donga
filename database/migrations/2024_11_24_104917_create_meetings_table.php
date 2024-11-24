@@ -19,7 +19,6 @@ return new class extends Migration
             $table->unsignedInteger('budget');
             $table->string('start_time');
             $table->string('end_time');
-            $table->string('people');
             $table->timestamps();
         });
     }

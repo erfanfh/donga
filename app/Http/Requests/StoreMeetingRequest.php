@@ -18,7 +18,7 @@ class StoreMeetingRequest extends FormRequest
             'budget' => 'nullable|sometimes|numeric|min:0',
             'start_time' => 'required|date',
             'end_time' => 'nullable|sometimes|date',
-            'people' => 'required',
+            'participants' => 'required',
         ];
     }
 
@@ -40,7 +40,7 @@ class StoreMeetingRequest extends FormRequest
             'start_time.date' => 'فرمت تاریخ شروع اشتباه است',
             'end_time.sometimes' => 'تاریخ پایان را وارد کنید',
             'end_time.date' => 'فرمت تاریخ پایان اشتباه است',
-            'people.required' => 'افراد شرکت کننده را وارد کنید',
+            'participants.required' => 'افراد شرکت کننده را وارد کنید',
         ];
     }
 }

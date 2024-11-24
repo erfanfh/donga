@@ -55,6 +55,10 @@
                             </th>
                             <th scope="col"
                                 class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-400">
+                                تاریخ عضویت
+                            </th>
+                            <th scope="col"
+                                class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-400">
                                 تراز مالی
                             </th>
                             <th scope="col"
@@ -80,14 +84,18 @@
                         </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-200 dark:divide-neutral-700">
-                        @foreach(explode(',', $meeting->people) as $person)
+                        @foreach($meeting->people as $person)
                             <tr>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
-                                    {{ $person }}
+                                    {{ $person->name }}
                                 </td>
 
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
-                                    000
+                                    {{ $person->created_at->format('Y/m/d') }}
+                                </td>
+
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                    - 1,000,000 تومان
                                 </td>
 
                                 <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">

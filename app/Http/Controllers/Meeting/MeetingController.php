@@ -23,10 +23,9 @@ class MeetingController extends Controller
      */
     public function store(StoreMeetingRequest $request, StoreNewMeetingAction $storeNewMeeting)
     {
-        $people = json_decode(str_replace('×', '', $request->people));
-        $arr = implode(',', $people);
+        $people = json_decode(str_replace('×', '', $request->participants));
 
-        $storeNewMeeting->execute($request, $arr);
+        $storeNewMeeting->execute($request, $people);
     }
 
     /**
