@@ -66,4 +66,14 @@ class User extends Authenticatable
     {
         return $this->firstName . " " . $this->lastName;
     }
+
+    /**
+     * Each user might have many meetings
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function meetings() : HasMany
+    {
+        return $this->hasMany(Meeting::class);
+    }
 }

@@ -14,10 +14,10 @@ class StoreMeetingRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|min:3|max:255',
+            'title' => 'required|min:3|max:255',
             'budget' => 'nullable|sometimes|numeric|min:0',
-            'start_date' => 'required|date',
-            'end_date' => 'nullable|sometimes|date',
+            'start_time' => 'required|date',
+            'end_time' => 'nullable|sometimes|date',
             'people' => 'required',
         ];
     }
@@ -30,16 +30,16 @@ class StoreMeetingRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'name.required' => 'نام دورهمی را وارد کنید',
-            'name.min' => 'نام دورهمی باید بیشتر از 3 حرف باشد',
-            'name.max' => 'نام دورهمی باید کمتر از 255 حرف باشد',
+            'title.required' => 'نام دورهمی را وارد کنید',
+            'title.min' => 'نام دورهمی باید بیشتر از 3 حرف باشد',
+            'title.max' => 'نام دورهمی باید کمتر از 255 حرف باشد',
             'budget.sometimes' => 'بودجه را وارد کنید',
             'budget.numeric' => 'بودجه باید فقط شامل عدد باشد',
             'budget.min' => 'بودجه نمیتواند کمتر از صفر باشد',
-            'start_date.required' => 'تاریخ شروع را وارد کنید',
-            'start_date.date' => 'فرمت تاریخ شروع اشتباه است',
-            'end_date.sometimes' => 'تاریخ پایان را وارد کنید',
-            'end_date.date' => 'فرمت تاریخ پایان اشتباه است',
+            'start_time.required' => 'تاریخ شروع را وارد کنید',
+            'start_time.date' => 'فرمت تاریخ شروع اشتباه است',
+            'end_time.sometimes' => 'تاریخ پایان را وارد کنید',
+            'end_time.date' => 'فرمت تاریخ پایان اشتباه است',
             'people.required' => 'افراد شرکت کننده را وارد کنید',
         ];
     }

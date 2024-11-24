@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Meeting;
 
+use App\Actions\Meeting\StoreNewMeetingAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreMeetingRequest;
 
@@ -14,8 +15,15 @@ class MeetingController extends Controller
      *
      * @return void
      */
-    public function store(StoreMeetingRequest $request)
+    public function store(StoreMeetingRequest $request, StoreNewMeetingAction $storeNewMeeting)
     {
+        $people = json_decode(str_replace('×', '', $request->people));
+        $arr = '';
 
+        foreach ($people as $person) {
+            $arr .= $person . '/';
+        }
+
+        $storeNewMeeting->execute($request, $arr);
     }
 }

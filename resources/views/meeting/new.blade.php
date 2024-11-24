@@ -9,14 +9,14 @@
         <div class="grid gap-6 mb-6 md:grid-cols-2">
             <div>
                 <label for="first_name"
-                       class="block mb-2 text-sm font-medium dark:text-white {{ $errors->has('name') ? 'text-red-700' : 'text-gray-900' }}">
+                       class="block mb-2 text-sm font-medium dark:text-white {{ $errors->has('title') ? 'text-red-700' : 'text-gray-900' }}">
                     نام دورهمی</label>
-                @if($errors->has('name'))
-                    <input type="text" id="first_name" name="name" value="{{ old('name') }}"
+                @if($errors->has('title'))
+                    <input type="text" id="first_name" name="title" value="{{ old('title') }}"
                            class="bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus-visible:ring-red-500 focus-visible:border-red-500 focus-visible:outline-none focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-red-700 dark:border-red-600 dark:placeholder-red-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500"
                            placeholder="سفر چالوس"/>
                 @else
-                    <input type="text" id="first_name" name="name" value="{{ old('name') }}"
+                    <input type="text" id="first_name" name="title" value="{{ old('title') }}"
                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                            placeholder="سفر چالوس"/>
                 @endif
@@ -39,7 +39,7 @@
 
             <div>
                 <label for="start-datepicker"
-                       class="block mb-2 text-sm font-medium dark:text-white {{ $errors->has('start_date') ? 'text-red-700' : 'text-gray-900' }}">
+                       class="block mb-2 text-sm font-medium dark:text-white {{ $errors->has('start_time') ? 'text-red-700' : 'text-gray-900' }}">
                     تاریخ شروع</label>
                 <div class="relative">
                     <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
@@ -49,23 +49,25 @@
                                 d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
                         </svg>
                     </div>
-                    @if($errors->has('start_date'))
-                        <input datepicker id="start-datepicker" type="text" name="start_date"
-                               value="{{ old('start_date') }}"
+                    @if($errors->has('start_time'))
+                        <input datepicker id="start-datepicker" type="text" name="start_time"
+                               value="{{ old('start_time') }}"
                                class="bg-red-50 border border-red-300 text-red-900 text-sm placeholder-red-700 rounded-lg focus:ring-red-500 focus:border-red-500 block w-full ps-10 p-2.5 dark:bg-red-700 dark:border-red-600 dark:placeholder-red-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500"
-                               placeholder="تاریخ را وارد کیند">
+                               placeholder="تاریخ را وارد کیند"
+                               autocomplete="off">
                     @else
-                        <input datepicker id="start-datepicker" type="text" name="start_date"
-                               value="{{ old('start_date') }}"
+                        <input datepicker id="start-datepicker" type="text" name="start_time"
+                               value="{{ old('start_time') }}"
                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                               placeholder="تاریخ را وارد کیند">
+                               placeholder="تاریخ را وارد کیند"
+                               autocomplete="off">
                     @endif
                 </div>
             </div>
 
             <div>
                 <label for="end-datepicker"
-                       class="block mb-2 text-sm font-medium dark:text-white {{ $errors->has('end_date') ? 'text-red-700' : 'text-gray-900' }}">
+                       class="block mb-2 text-sm font-medium dark:text-white {{ $errors->has('end_time') ? 'text-red-700' : 'text-gray-900' }}">
                     تاریخ پایان (اختیاری)</label>
                 <div class="relative">
                     <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
@@ -75,16 +77,18 @@
                                 d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
                         </svg>
                     </div>
-                    @if($errors->has('end_date'))
-                        <input datepicker id="end-datepicker" type="text" name="end_date"
-                               value="{{ old('end_date') }}"
+                    @if($errors->has('end_time'))
+                        <input datepicker id="end-datepicker" type="text" name="end_time"
+                               value="{{ old('end_time') }}"
                                class="bg-red-50 border border-red-300 text-red-900 text-sm placeholder-red-700 rounded-lg focus:ring-red-500 focus:border-red-500 block w-full ps-10 p-2.5 dark:bg-red-700 dark:border-red-600 dark:placeholder-red-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500"
-                               placeholder="تاریخ را وارد کیند">
+                               placeholder="تاریخ را وارد کیند"
+                               autocomplete="off">
                     @else
-                        <input datepicker id="end-datepicker" type="text" name="end_date"
-                               value="{{ old('end_date') }}"
+                        <input datepicker id="end-datepicker" type="text" name="end_time"
+                               value="{{ old('end_time') }}"
                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                               placeholder="تاریخ را وارد کیند">
+                               placeholder="تاریخ را وارد کیند"
+                               autocomplete="off">
                     @endif
                 </div>
             </div>
@@ -96,7 +100,8 @@
              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
             <input id="tag-input" type="text" name="people"
                    class="outline-none border-none flex-grow p-1 bg-transparent"
-                   placeholder="تایپ کنید و با tab جدا کنید">
+                   placeholder="تایپ کنید و با tab جدا کنید"
+                   autocomplete="off">
         </div>
 
         <button type="submit" id="submit"
@@ -116,13 +121,13 @@
             <div>
                 <span class="font-medium">خطاهای زیر را اصلاح کنید:</span>
                 <ul class="mt-1.5 list-disc list-inside">
-                    @error('name')
+                    @error('title')
                     <li> {{ $message }} </li> @enderror
                     @error('budget')
                     <li> {{ $message }} </li> @enderror
-                    @error('start_date')
+                    @error('start_time')
                     <li> {{ $message }} </li> @enderror
-                    @error('end_date')
+                    @error('end_time')
                     <li> {{ $message }} </li> @enderror
                     @error('people')
                     <li> {{ $message }} </li> @enderror
