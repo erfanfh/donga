@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Meeting;
 use App\Actions\Meeting\StoreNewMeetingAction;
 use App\Actions\Meeting\UpdateMeetingNameAction;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreExpenseAction;
+use App\Http\Requests\StoreExpenseRequest;
 use App\Http\Requests\StoreMeetingRequest;
 use App\Http\Requests\StoreUserPaymentRequest;
 use App\Models\Meeting;
@@ -65,5 +67,10 @@ class MeetingController extends Controller
     public function userPay(StoreUserPaymentRequest $request)
     {
         //
+    }
+
+    public function storeExpense(StoreExpenseRequest $storeExpense)
+    {
+        dd($storeExpense->all());
     }
 }
