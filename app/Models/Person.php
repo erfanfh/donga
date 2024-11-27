@@ -4,20 +4,25 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class People extends Model
+class Person extends Model
 {
+    protected $fillable = ['name', 'balance'];
 
-    protected $fillable = ['name'];
+    protected $table = 'persons';
 
     /**
      * Each user can participate in many meetings
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function meeting() : BelongsTo
+    public function meeting(): BelongsTo
     {
         return $this->belongsTo(Meeting::class);
+    }
+
+    public function expenses()
+    {
+        return $this->belongsToMany(Expense::class);
     }
 }

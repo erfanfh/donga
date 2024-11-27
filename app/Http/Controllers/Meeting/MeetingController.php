@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Meeting;
 
+use App\Actions\Meeting\Expense\ShareExpensePriceAction;
+use App\Actions\Meeting\Expense\StoreNewExpenseAction;
 use App\Actions\Meeting\StoreNewMeetingAction;
 use App\Actions\Meeting\UpdateMeetingNameAction;
 use App\Http\Controllers\Controller;
@@ -69,8 +71,12 @@ class MeetingController extends Controller
         //
     }
 
-    public function storeExpense(StoreExpenseRequest $storeExpense)
+    public function storeExpense(StoreExpenseRequest $request, Meeting $meeting, StoreNewExpenseAction $storeNewExpense, ShareExpensePriceAction $shareExpensePrice)
     {
-        dd($storeExpense->all());
+        $storeNewExpense->execute($request, $meeting);
+
+        $shareExpensePrice->execute($request);
+
+        return redirect()->route('meetings.show', compact('meeting'));
     }
 }

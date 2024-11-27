@@ -48,19 +48,19 @@
             <div
                 class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">خرج این سفر</h5>
-                <p class="font-normal text-gray-700 dark:text-gray-400">5,000,000 تومان</p>
+                <p class="font-normal text-gray-700 dark:text-gray-400">{{ number_format($meeting->expenses()->sum('price')) }} تومان</p>
             </div>
 
             <div
                 class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">تعداد افراد</h5>
-                <p class="font-normal text-gray-700 dark:text-gray-400">5 نفر</p>
+                <p class="font-normal text-gray-700 dark:text-gray-400">{{ $meeting->persons()->count() }} نفر</p>
             </div>
 
             <div
                 class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">طول سفر</h5>
-                <p class="font-normal text-gray-700 dark:text-gray-400">3 روز</p>
+                <p class="font-normal text-gray-700 dark:text-gray-400">{{ ceil($meeting->created_at->diffInDays(now())) }} روز </p>
             </div>
 
             <button type="button"
@@ -99,37 +99,60 @@
                         </button>
                     </div>
                     <!-- Modal body -->
-                    <form class="p-4 md:p-5 flex flex-col" action="{{ route('meetings.expense.store', $meeting) }}" method="POST">
+                    <form class="p-4 md:p-5 flex flex-col" action="{{ route('meetings.expense.store', $meeting) }}" id="expenseForm"
+                          method="POST">
                         @csrf
                         <div class="grid gap-4 mb-4 grid-cols-2">
                             <div class="col-span-2">
                                 <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">بابت</label>
-                                <input type="text" name="name" id="name"
+                                <input type="text" name="name" id="name" value="{{ old('name') }}"
                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                        placeholder="غذای ناهار رستوران">
+                                @error('name')
+                                <div class="text-red-500">
+                                    {{ $message }}
+                                </div>
+                                @enderror
                             </div>
                             <div class="col-span-2">
                                 <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">مبلغ</label>
-                                <input type="text" name="price" id="price"
+                                <input type="text" name="price" id="price" value="{{ old('price') }}"
                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                        placeholder="2,500,000 تومان">
+                                @error('price')
+                                <div class="text-red-500">
+                                    {{ $message }}
+                                </div>
+                                @enderror
                             </div>
                             <div class="col-span-2">
                                 <label for="category"
                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">برای
                                     افراد</label>
-                                <select id="user-multi-select" data-placeholder="افراد هدف" multiple="multiple" name="people">
-                                    @foreach($meeting->people as $person)
-                                        <option name="user{{$person->name}}" value="option-{{$person->id}}">{{ $person->name }}</option>
+                                <select id="user-multi-select" data-placeholder="افراد هدف" multiple="multiple"
+                                        name="people">
+                                    @foreach($meeting->persons as $person)
+                                        <option name="user{{$person->name}}"
+                                                value="{{$person->id}}">{{ $person->name }}</option>
                                     @endforeach
                                 </select>
+                                @error('people')
+                                <div class="text-red-500">
+                                    {{ $message }}
+                                </div>
+                                @enderror
                             </div>
                             <div class="col-span-2">
                                 <label for="description"
                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">توضیحات</label>
-                                <textarea id="description" rows="4" name="description"
+                                <textarea id="description" rows="4" name="description" value="{{ old('description') }}"
                                           class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                           placeholder="توضیحات این خرج را در صورت نیاز وارد کنید..."></textarea>
+                                @error('description')
+                                <div class="text-red-500">
+                                    {{ $message }}
+                                </div>
+                                @enderror
                             </div>
                         </div>
                         <button type="submit"
@@ -190,7 +213,7 @@
                             </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-200 dark:divide-neutral-700">
-                            @foreach($meeting->people as $person)
+                            @foreach($meeting->persons as $person)
                                 <tr>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
                                         {{ $person->name }}
@@ -201,7 +224,7 @@
                                     </td>
 
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
-                                        {{ $person->balance }} تومان
+                                        {{ number_format($person->balance) }} تومان
                                     </td>
 
                                     <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
@@ -305,4 +328,26 @@
     <script>
         new MultiSelect(document.getElementById('user-multi-select'));
     </script>
+    <script>
+        // Format the price input
+        document.getElementById('price').addEventListener('input', function (e) {
+            let input = e.target.value.replace(/\D/g, '');
+            input = input.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            e.target.value = input;
+        });
+
+    </script>
+    <script>
+        // Set the price inout unformat
+        document.getElementById('expenseForm').addEventListener('submit', function (e) {
+            let inputField = document.getElementById('price');
+            let inputValue = inputField.value.replace(/,/g, ''); // Remove commas
+            inputField.value = inputValue; // Update the input value
+        });
+    </script>
+
+
+
+
+
 @endsection

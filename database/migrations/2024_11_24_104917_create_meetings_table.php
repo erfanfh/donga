@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('title');
             $table->unsignedInteger('budget');
             $table->string('start_time');
-            $table->string('end_time');
+            $table->string('end_time')->nullable();
             $table->timestamps();
         });
     }

@@ -25,7 +25,7 @@ class StoreNewMeetingAction
         ]);
 
         foreach ($people as $person) {
-            $meeting->people()->create([
+            $meeting->persons()->create([
                 'name' => $person,
             ]);
         }

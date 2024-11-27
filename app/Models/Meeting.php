@@ -25,8 +25,13 @@ class Meeting extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function people() : HasMany
+    public function persons() : HasMany
     {
-        return $this->hasMany(People::class);
+        return $this->hasMany(Person::class);
+    }
+
+    public function expenses()
+    {
+        return $this->hasMany(Expense::class);
     }
 }
