@@ -48,7 +48,8 @@
             <div
                 class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">خرج این سفر</h5>
-                <p class="font-normal text-gray-700 dark:text-gray-400">{{ number_format($meeting->expenses()->sum('price')) }} تومان</p>
+                <p class="font-normal text-gray-700 dark:text-gray-400">{{ number_format($meeting->expenses()->sum('price')) }}
+                    تومان</p>
             </div>
 
             <div
@@ -60,13 +61,14 @@
             <div
                 class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">طول سفر</h5>
-                <p class="font-normal text-gray-700 dark:text-gray-400">{{ ceil($meeting->created_at->diffInDays(now())) }} روز </p>
+                <p class="font-normal text-gray-700 dark:text-gray-400">{{ ceil($meeting->created_at->diffInDays(now())) }}
+                    روز </p>
             </div>
 
             <button type="button"
                     class="flex flex-col items-center justify-evenly max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
                     aria-label="Add new record"
-                    data-modal-target="crud-modal" data-modal-toggle="crud-modal">
+                    data-modal-target="create-expense-modal" data-modal-toggle="create-expense-modal">
                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-plus-lg"
                      viewBox="0 0 16 16">
                     <path fill-rule="evenodd"
@@ -76,8 +78,8 @@
             </button>
         </div>
 
-        <!-- New ExpenseModal -->
-        <div id="crud-modal" tabindex="-1" aria-hidden="true"
+        <!-- New Expense Modal -->
+        <div id="create-expense-modal" tabindex="-1" aria-hidden="true"
              class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
             <div class="relative p-4 w-full max-w-md max-h-full">
                 <!-- Modal content -->
@@ -89,7 +91,7 @@
                         </h3>
                         <button type="button"
                                 class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                                data-modal-toggle="crud-modal">
+                                data-modal-toggle="create-expense-modal">
                             <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                                  viewBox="0 0 14 14">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -99,7 +101,8 @@
                         </button>
                     </div>
                     <!-- Modal body -->
-                    <form class="p-4 md:p-5 flex flex-col" action="{{ route('meetings.expense.store', $meeting) }}" id="expenseForm"
+                    <form class="p-4 md:p-5 flex flex-col" action="{{ route('meetings.expense.store', $meeting) }}"
+                          id="expenseForm"
                           method="POST">
                         @csrf
                         <div class="grid gap-4 mb-4 grid-cols-2">
@@ -170,6 +173,54 @@
             </div>
         </div>
 
+        <!-- New User Modal -->
+        <div id="add-user-modal" tabindex="-1" aria-hidden="true"
+             class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+            <div class="relative p-4 w-full max-w-md max-h-full">
+                <!-- Modal content -->
+                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                    <!-- Modal header -->
+                    <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                            اضافه کردن فرد جدید
+                        </h3>
+                        <button type="button"
+                                class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                                data-modal-toggle="add-user-modal">
+                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                 viewBox="0 0 14 14">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                      stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                            </svg>
+                            <span class="sr-only">Close modal</span>
+                        </button>
+                    </div>
+                    <!-- Modal body -->
+                    <form class="p-4 md:p-5 flex flex-col" action="{{ route('meetings.add.user', $meeting) }}"
+                          method="POST">
+                        @csrf
+                        <div class="grid gap-4 mb-4 grid-cols-2">
+                            <div class="col-span-2">
+                                <label for="user-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">نام</label>
+                                <input type="text" name="name" id="user-name" value="{{ old('name') }}"
+                                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                       placeholder="امیرحسین کدخدا">
+                                @error('name')
+                                <div class="text-red-500">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+                            </div>
+                        </div>
+                        <button type="submit"
+                                class="w-1/4 self-end text-white items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                            <p>افزودن</p>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
         <div class="flex flex-col mt-6">
             <div class="-m-1.5 overflow-x-auto">
                 <div class="p-1.5 min-w-full inline-block align-middle">
@@ -198,7 +249,8 @@
                                     class="flex justify-end px-6 py-3 text-end text-xs font-medium text-gray-500 uppercase dark:text-neutral-400">
 
                                     <button type="button"
-                                            class="flex items-center gap-1 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                                            class="flex items-center gap-1 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                                            data-modal-target="add-user-modal" data-modal-toggle="add-user-modal">
                                         افزودن
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                              fill="currentColor"
@@ -345,9 +397,5 @@
             inputField.value = inputValue; // Update the input value
         });
     </script>
-
-
-
-
 
 @endsection

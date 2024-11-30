@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Person extends Model
 {
@@ -21,7 +22,12 @@ class Person extends Model
         return $this->belongsTo(Meeting::class);
     }
 
-    public function expenses()
+    /**
+     * Each person might belong to many expenses
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function expenses() : BelongsToMany
     {
         return $this->belongsToMany(Expense::class);
     }

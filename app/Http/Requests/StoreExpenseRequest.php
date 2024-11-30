@@ -22,6 +22,12 @@ class StoreExpenseRequest extends FormRequest
         ];
     }
 
+    /**
+     * Set the validation errors messages
+     *
+     * @return string[]
+     */
+
     public function messages(): array
     {
         return [

@@ -6,7 +6,9 @@ use App\Actions\Meeting\Expense\ShareExpensePriceAction;
 use App\Actions\Meeting\Expense\StoreNewExpenseAction;
 use App\Actions\Meeting\StoreNewMeetingAction;
 use App\Actions\Meeting\UpdateMeetingNameAction;
+use App\Actions\Meeting\User\AddNewUserAction;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AddNewUserForAMeetingRequest;
 use App\Http\Requests\StoreExpenseAction;
 use App\Http\Requests\StoreExpenseRequest;
 use App\Http\Requests\StoreMeetingRequest;
@@ -71,6 +73,16 @@ class MeetingController extends Controller
         //
     }
 
+    /**
+     * Create a new expense for an existing meeting
+     *
+     * @param \App\Http\Requests\StoreExpenseRequest $request
+     * @param \App\Models\Meeting $meeting
+     * @param \App\Actions\Meeting\Expense\StoreNewExpenseAction $storeNewExpense
+     * @param \App\Actions\Meeting\Expense\ShareExpensePriceAction $shareExpensePrice
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function storeExpense(StoreExpenseRequest $request, Meeting $meeting, StoreNewExpenseAction $storeNewExpense, ShareExpensePriceAction $shareExpensePrice)
     {
         $storeNewExpense->execute($request, $meeting);
@@ -78,5 +90,12 @@ class MeetingController extends Controller
         $shareExpensePrice->execute($request);
 
         return redirect()->route('meetings.show', compact('meeting'));
+    }
+
+    public function addUser(AddNewUserForAMeetingRequest $request, Meeting $meeting, AddNewUserAction $addNewUser)
+    {
+        $addNewUser->execute($request, $meeting);
+
+        return redirect()->back();
     }
 }
