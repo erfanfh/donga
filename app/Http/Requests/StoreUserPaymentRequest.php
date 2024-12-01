@@ -16,6 +16,7 @@ class StoreUserPaymentRequest extends FormRequest
     {
         return [
             'amount' => 'required|numeric|min:0',
+            'creditor' => 'required',
         ];
     }
 
@@ -30,6 +31,7 @@ class StoreUserPaymentRequest extends FormRequest
             'amount.required' => 'مبلغ را وارد کنید',
             'amount.numeric' => 'مبلغ را صحیح وارد کنید',
             'amount.min' => 'مبلغ را مثبت وارد کنید',
+            'creditor.required' => 'به چه کسی پرداخت میکنید؟',
         ];
     }
 }

@@ -47,7 +47,8 @@
         <div class="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-7.5">
             <div
                 class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">خرج این سفر</h5>
+                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                    خرج {{ $meeting->title }}</h5>
                 <p class="font-normal text-gray-700 dark:text-gray-400">{{ number_format($meeting->expenses()->sum('price')) }}
                     تومان</p>
             </div>
@@ -60,7 +61,8 @@
 
             <div
                 class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">طول سفر</h5>
+                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                    طول {{ $meeting->title }}</h5>
                 <p class="font-normal text-gray-700 dark:text-gray-400">{{ ceil($meeting->created_at->diffInDays(now())) }}
                     روز </p>
             </div>
@@ -134,9 +136,9 @@
                                     افراد</label>
                                 <select id="user-multi-select" data-placeholder="افراد هدف" multiple="multiple"
                                         name="people">
-                                    @foreach($meeting->persons as $person)
-                                        <option name="user{{$person->name}}"
-                                                value="{{$person->id}}">{{ $person->name }}</option>
+                                    @foreach($meeting->persons as $creditor)
+                                        <option name="user{{$creditor->name}}"
+                                                value="{{$creditor->id}}">{{ $creditor->name }}</option>
                                     @endforeach
                                 </select>
                                 @error('people')
@@ -146,11 +148,14 @@
                                 @enderror
                             </div>
                             <div class="col-span-2">
-                                <label for="sponsor" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">خرج کننده</label>
-                                <select id="sponsor" dir="rtl" name="sponsor" class="bg-gray-50 border pe-5 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                    @foreach($meeting->persons as $person)
-                                        <option name="user{{$person->name}}"
-                                                value="{{$person->id}}">{{ $person->name }}</option>
+                                <label for="sponsor"
+                                       class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">خرج
+                                    کننده</label>
+                                <select id="sponsor" dir="rtl" name="sponsor"
+                                        class="bg-gray-50 border pe-5 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    @foreach($meeting->persons as $creditor)
+                                        <option name="user{{$creditor->name}}"
+                                                value="{{$creditor->id}}">{{ $creditor->name }}</option>
                                     @endforeach
                                 </select>
                                 @error('people')
@@ -215,7 +220,8 @@
                         @csrf
                         <div class="grid gap-4 mb-4 grid-cols-2">
                             <div class="col-span-2">
-                                <label for="user-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">نام</label>
+                                <label for="user-name"
+                                       class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">نام</label>
                                 <input type="text" name="name" id="user-name" value="{{ old('name') }}"
                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                        placeholder="امیرحسین کدخدا">
@@ -350,34 +356,58 @@
                                                     </svg>
                                                     <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
                                                         مقدار پرداختی {{$person->name}} را وارد کنید</h3>
-                                                    <form class="space-y-4"
-                                                          action="{{ route('meetings.pay.user', [$meeting->id, $person->id]) }}"
-                                                          method="post">
+                                                    <form class="p-4 md:p-5 flex flex-col paymentForm"
+                                                          action="{{ route('meetings.pay.user', $person) }}"
+                                                          method="POST">
                                                         @csrf
-                                                        <div class="my-3">
-                                                            <label
-                                                                class="text-start block mb-2 text-sm font-medium text-gray-900 dark:text-white">مبلغ
-                                                                به تومان</label>
-                                                            <input type="text" name="amount"
-                                                                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                                                                   placeholder="1,000,000"
-                                                            />
+                                                        <div class="grid gap-4 mb-4 grid-cols-2">
+                                                            <div class="col-span-2">
+                                                                <label for="amount-{{ $person->id }}"
+                                                                       class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">مبلغ</label>
+                                                                <input type="text" name="amount" id="amount-{{ $person->id }}"
+                                                                       value="{{ old('price') }}"
+                                                                       class="amount bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                                                       placeholder="1,000,000 تومان">
+                                                                @error('amount')
+                                                                <div class="text-red-500">
+                                                                    {{ $message }}
+                                                                </div>
+                                                                @enderror
+                                                            </div>
+                                                            <div class="col-span-2">
+                                                                <label for="creditor"
+                                                                       class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">پرداخت
+                                                                    به</label>
+                                                                <select id="creditor" dir="rtl" name="creditor"
+                                                                        class="bg-gray-50 border pe-5 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                                    @foreach($meeting->getCreditorsAttribute($meeting) as $creditor)
+                                                                        <option name="user{{$creditor->name}}"
+                                                                                value="{{$creditor->id}}">{{ $creditor->name . " ( طلب " . number_format($creditor->balance) . " تومان)" }}</option>
+                                                                    @endforeach
+                                                                </select>
+                                                                @error('creditor')
+                                                                <div class="text-red-500">
+                                                                    {{ $message }}
+                                                                </div>
+                                                                @enderror
+                                                            </div>
                                                         </div>
                                                         <button type="submit"
-                                                                class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
-                                                            بله، اطمینان دارم
-                                                        </button>
-                                                        <button data-modal-hide="popup-modal-{{ $person->id }}"
-                                                                type="button"
-                                                                class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
-                                                            خیر، منصرف شدم
+                                                                class="flex gap-2 w-1/4 self-end text-white items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                                            <p>ایجاد</p>
+                                                            <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor"
+                                                                 viewBox="0 0 20 20"
+                                                                 xmlns="http://www.w3.org/2000/svg">
+                                                                <path fill-rule="evenodd"
+                                                                      d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+                                                                      clip-rule="evenodd"></path>
+                                                            </svg>
                                                         </button>
                                                     </form>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-
                                 </tr>
                             @endforeach
                             </tbody>
@@ -423,14 +453,12 @@
             input = input.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
             e.target.value = input;
         });
-
     </script>
     <script>
         // Set the price inout unformat
         document.getElementById('expenseForm').addEventListener('submit', function (e) {
             let inputField = document.getElementById('price');
-            let inputValue = inputField.value.replace(/,/g, ''); // Remove commas
-            inputField.value = inputValue; // Update the input value
+            inputField.value = inputField.value.replace(/,/g, '');
         });
     </script>
 

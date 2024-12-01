@@ -2,11 +2,16 @@
 
 namespace App\Actions\Meeting\Expense;
 
-use App\Models\Expense;
 use App\Models\Meeting;
 
 class StoreNewExpenseAction {
-    public function execute($request, Meeting $meeting)
+    /**
+     * @param $request
+     * @param \App\Models\Meeting $meeting
+     *
+     * @return void
+     */
+    public function execute($request, Meeting $meeting): void
     {
         $expense = $meeting->expenses()->create([
             'name' => $request->name,
