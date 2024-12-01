@@ -19,6 +19,7 @@ class StoreExpenseRequest extends FormRequest
             'price' => 'required|numeric|min:0',
             'people' => 'required',
             'description' => 'nullable|max:2000',
+            'sponsor' => 'required',
         ];
     }
 
@@ -38,6 +39,7 @@ class StoreExpenseRequest extends FormRequest
           'price.min'  => 'مقدار خرج باید عددی مثبت باشد.',
           'people.required'  => 'افراد دخیل در خرج را وارد کنید.',
           'description.max'  => 'توضیحات نباید بیشتر از 2000 حرف باشد.',
+          'sponsor.required'  => 'لطفا فرد خرج کننده را وارد کنید.',
         ];
     }
 }

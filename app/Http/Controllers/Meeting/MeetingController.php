@@ -92,7 +92,14 @@ class MeetingController extends Controller
         return redirect()->route('meetings.show', compact('meeting'));
     }
 
-    public function addUser(AddNewUserForAMeetingRequest $request, Meeting $meeting, AddNewUserAction $addNewUser)
+    /**
+     * @param \App\Http\Requests\AddNewUserForAMeetingRequest $request
+     * @param \App\Models\Meeting $meeting
+     * @param \App\Actions\Meeting\User\AddNewUserAction $addNewUser
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function addUser(AddNewUserForAMeetingRequest $request, Meeting $meeting, AddNewUserAction $addNewUser) : RedirectResponse
     {
         $addNewUser->execute($request, $meeting);
 
