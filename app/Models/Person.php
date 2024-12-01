@@ -31,4 +31,18 @@ class Person extends Model
     {
         return $this->belongsToMany(Expense::class);
     }
+
+    /**
+     * @return string
+     */
+    public function getStatusAttribute(): string
+    {
+        if ($this->balance > 0)
+            return 'creditor';
+
+        if ($this->balance < 0)
+            return 'debtor';
+
+        return 'settled';
+    }
 }

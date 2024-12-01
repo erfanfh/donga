@@ -255,6 +255,10 @@
                                     تراز مالی
                                 </th>
                                 <th scope="col"
+                                    class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-400">
+                                    وضعیت
+                                </th>
+                                <th scope="col"
                                     class="px-6 py-3 text-end text-xs font-medium text-gray-500 uppercase dark:text-neutral-400">
                                     عملیات
                                 </th>
@@ -289,8 +293,26 @@
                                         {{ \Morilog\Jalali\Jalalian::fromCarbon($person->created_at)->format('Y/m/d') }}
                                     </td>
 
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                    @php
+                                        $textColor = match($person->status) {
+                                            'creditor' => 'text-green-600',
+                                            'debtor' => 'text-red-600',
+                                            default => 'text-gray-800',
+                                        };
+                                    @endphp
+
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm {{ $textColor }} dark:text-neutral-200">
                                         {{ number_format($person->balance) }} تومان
+                                    </td>
+
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                                        @if($person->status == 'creditor')
+                                            طلبکار
+                                        @elseif($person->status == 'debtor')
+                                            بدهکار
+                                        @else
+                                            تسویه
+                                        @endif
                                     </td>
 
                                     <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
