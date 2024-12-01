@@ -12,4 +12,5 @@ Route::group(['middleware' => ['auth', UserMustBeVerified::class], 'prefix' => '
     Route::post('/{person}/pay', [MeetingController::class, 'userPay'])->name('meetings.pay.user');
     Route::post('/{meeting}/expense/store', [MeetingController::class, 'storeExpense'])->name('meetings.expense.store');
     Route::post('/{meeting}/add', [MeetingController::class, 'addUser'])->name('meetings.add.user');
+    Route::delete('{person}/delete}', [MeetingController::class, 'deleteUser'])->name('meetings.delete.user');
 });

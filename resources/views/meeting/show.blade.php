@@ -305,6 +305,22 @@
                                             'debtor' => 'text-red-600',
                                             default => 'text-gray-800',
                                         };
+
+                                        $enable = match($person->status) {
+                                            'debtor' => ' ',
+                                            default => 'disabled',
+                                        };
+
+                                        $balance = match($person->balance) {
+                                            0 => ' ',
+                                            default => 'disabled',
+                                        };
+
+                                        $status = match($person->status) {
+                                            'creditor' => 'طلبکار',
+                                            'debtor' => 'بدهکار',
+                                            default => 'تسویه',
+                                        };
                                     @endphp
 
                                     <td class="px-6 py-4 whitespace-nowrap text-sm {{ $textColor }} dark:text-neutral-200">
@@ -312,24 +328,36 @@
                                     </td>
 
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
-                                        @if($person->status == 'creditor')
-                                            طلبکار
-                                        @elseif($person->status == 'debtor')
-                                            بدهکار
-                                        @else
-                                            تسویه
-                                        @endif
+                                        {{ $status }}
                                     </td>
 
                                     <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
-                                        <button type="button" data-modal-target="popup-modal-{{$person->id}}"
+                                        <button type="button" {{ $enable }} data-modal-target="popup-modal-{{$person->id}}"
                                                 data-modal-toggle="popup-modal-{{$person->id}}"
                                                 class="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 focus:outline-none focus:text-blue-800 disabled:opacity-50 disabled:pointer-events-none dark:text-blue-500 dark:hover:text-blue-400 dark:focus:text-blue-400">
                                             پرداخت
                                         </button>
                                     </td>
 
-                                    <div id="popup-modal-{{$person->id}}" tabindex="-1"
+                                    <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
+                                        <form action="{{ route('meetings.delete.user', $person) }}" method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" {{ $balance }}
+                                                    class="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 focus:outline-none focus:text-blue-800 disabled:opacity-50 disabled:pointer-events-none dark:text-blue-500 dark:hover:text-blue-400 dark:focus:text-blue-400">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                     fill="red" class="bi bi-trash" viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+                                                    <path
+                                                        d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+                                                </svg>
+                                            </button>
+                                        </form>
+                                    </td>
+
+                                    @if($enable != 'disabled')
+                                        <div id="popup-modal-{{$person->id}}" tabindex="-1"
                                          class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
                                         <div class="relative p-4 w-full max-w-md max-h-full">
                                             <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
@@ -364,7 +392,8 @@
                                                             <div class="col-span-2 flex flex-col items-start">
                                                                 <label for="amount-{{ $person->id }}"
                                                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">مبلغ</label>
-                                                                <input type="text" name="amount" id="amount-{{ $person->id }}"
+                                                                <input type="text" name="amount"
+                                                                       id="amount-{{ $person->id }}"
                                                                        value="{{ old('price') }}"
                                                                        class="amount bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                                                        placeholder="1,000,000 تومان">
@@ -408,6 +437,8 @@
                                             </div>
                                         </div>
                                     </div>
+                                    @endif
+
                                 </tr>
                             @endforeach
                             </tbody>

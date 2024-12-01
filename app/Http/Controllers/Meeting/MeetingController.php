@@ -8,6 +8,7 @@ use App\Actions\Meeting\Payment\StoreNewPaymentAction;
 use App\Actions\Meeting\StoreNewMeetingAction;
 use App\Actions\Meeting\UpdateMeetingNameAction;
 use App\Actions\Meeting\User\AddNewUserAction;
+use App\Actions\User\DestroyUserAction;
 use App\Actions\User\UpdateUserBalanceAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AddNewUserForAMeetingRequest;
@@ -130,6 +131,24 @@ class MeetingController extends Controller
         $addNewUserAction = new AddNewUserAction;
 
         $addNewUserAction->execute($request, $meeting);
+
+        return redirect()->back();
+    }
+
+    /**
+     * @param \App\Models\Person $person
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function deleteUser(Person $person): RedirectResponse
+    {
+        if (! Gate::allows('delete-person', [$person])) {
+            return redirect()->back()->with('notification-error', 'برای حذف کاربری باید ابتدا وضعیت او را به تسویه تغییر دهید.');
+        }
+
+        $destroyUser = new DestroyUserAction;
+
+        $destroyUser->execute($person);
 
         return redirect()->back();
     }
