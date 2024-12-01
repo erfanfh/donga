@@ -361,7 +361,7 @@
                                                           method="POST">
                                                         @csrf
                                                         <div class="grid gap-4 mb-4 grid-cols-2">
-                                                            <div class="col-span-2">
+                                                            <div class="col-span-2 flex flex-col items-start">
                                                                 <label for="amount-{{ $person->id }}"
                                                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">مبلغ</label>
                                                                 <input type="text" name="amount" id="amount-{{ $person->id }}"
@@ -374,7 +374,7 @@
                                                                 </div>
                                                                 @enderror
                                                             </div>
-                                                            <div class="col-span-2">
+                                                            <div class="col-span-2 flex flex-col items-start">
                                                                 <label for="creditor"
                                                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">پرداخت
                                                                     به</label>

@@ -18,6 +18,7 @@ use App\Models\Meeting;
 use App\Models\Person;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\View\View;
 
 
@@ -79,6 +80,14 @@ class MeetingController extends Controller
      */
     public function userPay(StoreUserPaymentRequest $request, Person $person): RedirectResponse
     {
+        if (! Gate::allows('make-self-payment', [$person, $request])) {
+            return redirect()->back()->with('notification-error', 'نمی توانید به خودتان پرداخت داشته باشید.');
+        }
+
+        if (! Gate::allows('make-payment', $person )) {
+            return redirect()->back()->with('notification-error', 'نمی توانید بدون داشتن بدهی پرداخت داشته باشید.');
+        }
+
         $storeNewPayment = new StoreNewPaymentAction;
         $updateUserBalance = new UpdateUserBalanceAction;
 
