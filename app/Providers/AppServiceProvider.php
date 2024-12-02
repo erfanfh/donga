@@ -35,7 +35,7 @@ class AppServiceProvider extends ServiceProvider
 
         //Forbid user from be destroyed if it is debator
         Gate::define('delete-person', function (User $user, Person $person) {
-            return $person->balance = 0;
+            return $person->balance == 0;
         });
     }
 }
