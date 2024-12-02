@@ -179,7 +179,7 @@
                                             </button>
                                             <div class="p-4 md:p-5 text-center">
                                                 <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-                                                    مقدار پرداختی {{$person->name}} را وارد کنید</h3>
+                                                    مبلغ پرداختی {{$person->name}} را وارد کنید</h3>
                                                 <form class="p-4 md:p-5 flex flex-col paymentForm"
                                                       action="{{ route('meetings.pay.user', $person) }}"
                                                       method="POST">
@@ -192,7 +192,7 @@
                                                                    id="amount-{{ $person->id }}"
                                                                    value="{{ old('price') }}"
                                                                    class="amount bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                                                   placeholder="1,000,000 تومان">
+                                                                   placeholder="حداکثر {{ number_format(-$person->balance) }} تومان">
                                                             @error('amount')
                                                             <div class="text-red-500">
                                                                 {{ $message }}

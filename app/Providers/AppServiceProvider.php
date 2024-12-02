@@ -34,8 +34,8 @@ class AppServiceProvider extends ServiceProvider
         });
 
         //Forbid user from make payment more than it's debate
-        Gate::define('make-too-payment', function (User $user, Person $person, int $amount) {
-            return -$person->balance >= $amount;
+        Gate::define('make-too-payment', function (User $user, Person $person, Person $creditor, int $amount) {
+            return -$person->balance >= $amount && $creditor->balance >= $amount;
         });
 
         //Forbid user from be destroyed if it is debator

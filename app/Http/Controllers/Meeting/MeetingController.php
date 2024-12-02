@@ -93,14 +93,15 @@ class MeetingController extends Controller
             return redirect()->back()->with('notification-error', 'نمی توانید بدون داشتن بدهی پرداخت داشته باشید.');
         }
 
-        if (Gate::denies('make-too-payment', [$person, $request->amount] )) {
-            return redirect()->back()->with('notification-error', 'نمی توانید بیشتر از بدهی خود پرداخت داشته باشید.');
+        $creditor = Person::find($request->creditor);
+
+        if (Gate::denies('make-too-payment', [$person, $creditor, $request->amount] )) {
+            return redirect()->back()->with('notification-error', 'مبلغ پرداختی صحیح نمی باشد.');
         }
+
 
         $storeNewPayment = new StoreNewPaymentAction;
         $updateUserBalance = new UpdateUserBalanceAction;
-
-        $creditor = Person::find($request->creditor);
 
         $storeNewPayment->execute($request, $person);
         $updateUserBalance->execute($person, $request->amount);
