@@ -40,7 +40,7 @@ class MeetingController extends Controller
 
         $meeting =$storeNewMeetingAction->execute($request, $people);
 
-        return redirect()->route('meetings.show', $meeting)->with('notification-success', 'دوره با موفقیت ایجاد شد.');
+        return redirect()->route('meetings.show', $meeting)->with('notification-success', 'دورهمی با موفقیت ایجاد شد.');
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace App\Actions\Meeting\Expense;
 
 use App\Models\Meeting;
+use App\Models\Person;
 
 class StoreNewExpenseAction {
     /**
@@ -16,6 +17,7 @@ class StoreNewExpenseAction {
         $expense = $meeting->expenses()->create([
             'name' => $request->name,
             'price' => $request->price,
+            'person_id' => $request->sponsor,
             'description' => $request->description ?? ' ',
         ]);
 

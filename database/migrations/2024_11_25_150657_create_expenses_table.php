@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->unsignedBigInteger('meeting_id');
             $table->foreign('meeting_id')->references('id')->on('meetings')->onDelete('cascade')->onUpdate('cascade');
+            $table->unsignedBigInteger('person_id');
+            $table->foreign('person_id')->references('id')->on('persons')->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedInteger('price');
             $table->text('description');
             $table->timestamps();

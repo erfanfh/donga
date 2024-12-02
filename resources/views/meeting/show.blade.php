@@ -22,6 +22,8 @@
         <x-meeting_new_user_modal :meeting="$meeting"/>
 
         <x-meeting_users_table :meeting="$meeting"/>
+
+        <x-meeting_timeline :meeting="$meeting"/>
     </section>
     <script src="{{ asset('js/MultiSelect.js') }}"></script>
     <script>
