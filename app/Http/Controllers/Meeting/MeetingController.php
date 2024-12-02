@@ -30,13 +30,17 @@ class MeetingController extends Controller
      *
      * @param \App\Http\Requests\StoreMeetingRequest $request
      *
-     * @return void
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(StoreMeetingRequest $request)
+    public function store(StoreMeetingRequest $request) : RedirectResponse
     {
+        $storeNewMeetingAction = new StoreNewMeetingAction;
+
         $people = json_decode(str_replace('×', '', $request->participants));
 
-        StoreNewMeetingAction::execute($request, $people);
+        $meeting =$storeNewMeetingAction->execute($request, $people);
+
+        return redirect()->route('meetings.show', $meeting)->with('notification-success', 'دوره با موفقیت ایجاد شد.');
     }
 
     /**
@@ -70,7 +74,7 @@ class MeetingController extends Controller
 
         $updateMeetingName->execute($meeting, $request->title);
 
-        return redirect()->route('meetings.show', compact('meeting'));
+        return redirect()->route('meetings.show', compact('meeting'))->with('notification-success', 'نام دورهمی با موفقیت تغییر یافت.');
     }
 
     /**
@@ -81,12 +85,16 @@ class MeetingController extends Controller
      */
     public function userPay(StoreUserPaymentRequest $request, Person $person): RedirectResponse
     {
-        if (! Gate::allows('make-self-payment', [$person, $request])) {
+        if (Gate::denies('make-self-payment', [$person, $request])) {
             return redirect()->back()->with('notification-error', 'نمی توانید به خودتان پرداخت داشته باشید.');
         }
 
-        if (! Gate::allows('make-payment', $person )) {
+        if (Gate::denies('make-payment', $person )) {
             return redirect()->back()->with('notification-error', 'نمی توانید بدون داشتن بدهی پرداخت داشته باشید.');
+        }
+
+        if (Gate::denies('make-too-payment', [$person, $request->amount] )) {
+            return redirect()->back()->with('notification-error', 'نمی توانید بیشتر از بدهی خود پرداخت داشته باشید.');
         }
 
         $storeNewPayment = new StoreNewPaymentAction;
@@ -98,7 +106,7 @@ class MeetingController extends Controller
         $updateUserBalance->execute($person, $request->amount);
         $updateUserBalance->execute($creditor, -$request->amount);
 
-        return redirect()->back();
+        return redirect()->back()->with('notification-success', 'پرداخت با موفقیت انجام شد.');
     }
 
     /**
@@ -117,7 +125,7 @@ class MeetingController extends Controller
         $storeNewExpense->execute($request, $meeting);
         $shareExpensePrice->execute($request);
 
-        return redirect()->route('meetings.show', compact('meeting'));
+        return redirect()->route('meetings.show', compact('meeting'))->with('notification-success', 'خرج جدید با موفقیت ایجاد شد.');
     }
 
     /**
@@ -132,7 +140,7 @@ class MeetingController extends Controller
 
         $addNewUserAction->execute($request, $meeting);
 
-        return redirect()->back();
+        return redirect()->back()->with('notification-success', 'کاربر با موفقیت ایجاد شد.');
     }
 
     /**
@@ -150,6 +158,6 @@ class MeetingController extends Controller
 
         $destroyUser->execute($person);
 
-        return redirect()->back();
+        return redirect()->back()->with('notification-success', 'کاربر با موفقیت حذف شد.');
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Actions\Meeting;
 
 use App\Http\Requests\StoreMeetingRequest;
+use App\Models\Meeting;
 
 
 class StoreNewMeetingAction
@@ -12,10 +13,11 @@ class StoreNewMeetingAction
      * Save newly created meeting in database
      *
      * @param \App\Http\Requests\StoreMeetingRequest $request
+     * @param array $people
      *
-     * @return void
+     * @return \App\Models\Meeting
      */
-    public function execute(StoreMeetingRequest $request, array $people): void
+    public function execute(StoreMeetingRequest $request, array $people): Meeting
     {
         $meeting = auth()->user()->meetings()->create([
             'title' => $request->title,
@@ -29,5 +31,7 @@ class StoreNewMeetingAction
                 'name' => $person,
             ]);
         }
+
+        return $meeting;
     }
 }
