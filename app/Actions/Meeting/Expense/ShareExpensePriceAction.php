@@ -15,16 +15,22 @@ class ShareExpensePriceAction {
     {
         $updateUserBalance = new UpdateUserBalanceAction();
 
-        $share = $request->price / count($request->people);
+        $price = $request->price;
+        $peopleCount = count($request->people);
+        $share = floor($price / $peopleCount);
+        $remainder = $price - ($share * $peopleCount);
 
-        $sponser = Person::find($request->sponsor);
+        $sponsor = Person::find($request->sponsor);
 
-        $updateUserBalance->execute($sponser, $request->price);
+        $updateUserBalance->execute($sponsor, $price);
 
-        foreach ($request->people as $person) {
+        foreach ($request->people as $index => $person) {
             $user = Person::find($person);
-            $updateUserBalance->execute($user, -$share);
-        }
 
+            $finalShare = $index === $peopleCount - 1 ? -($share + $remainder) : -$share;
+
+            $updateUserBalance->execute($user, $finalShare);
+        }
     }
+
 }
