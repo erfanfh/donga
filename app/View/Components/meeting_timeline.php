@@ -23,6 +23,6 @@ class meeting_timeline extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.meeting_timeline');
+        return view('components.meeting_timeline', ['timeline' => $this->meeting->expenses->merge($this->meeting->payments)]);
     }
 }

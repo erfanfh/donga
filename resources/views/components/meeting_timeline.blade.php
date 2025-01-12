@@ -2,7 +2,7 @@
     @php
         use Illuminate\Support\Collection;
 
-        $combined = $meeting->expenses->merge($meeting->payments)->sortByDesc('created_at');
+        $combined = $meeting->expenses->concat($meeting->payments)->sortByDesc('created_at');
 
     @endphp
     @foreach($combined as $item)
@@ -32,7 +32,7 @@
                     class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -start-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
                 <time
                     class="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">{{ \Morilog\Jalali\Jalalian::fromCarbon($item->created_at)->format('H:i Y/m/d') }}</time>
-                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">{{ $item->name }}</h3>
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">بابت : {{ $item->name }}</h3>
                 <p class="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">{{ $item->description }}</p>
                 <span
                     class="bg-red-100 text-red-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">{{ number_format($item->price) }} تومان خرج شد</span>
