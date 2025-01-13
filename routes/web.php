@@ -14,3 +14,6 @@ require __DIR__ . '/routes/Dashboard/dashboard.php';
 
 //Meeting
 require __DIR__ . '/routes/Meeting/meeting.php';
+
+//Profile
+require __DIR__ . '/routes/User/profile.php';

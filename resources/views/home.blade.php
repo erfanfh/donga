@@ -8,6 +8,6 @@
     <title>دنگا</title>
 </head>
 <body>
-{{ auth()->user()->name }}
+{{ auth()->user() ? auth()->user()->name : "مهمان" }}
 </body>
 </html>
