@@ -76,4 +76,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Meeting::class);
     }
+
+    /**
+     * each user may have many tickets
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function tickets(): HasMany
+    {
+        return $this->hasMany(Ticket::class);
+    }
 }

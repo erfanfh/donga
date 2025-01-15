@@ -17,3 +17,6 @@ require __DIR__ . '/routes/Meeting/meeting.php';
 
 //Profile
 require __DIR__ . '/routes/User/profile.php';
+
+//Support
+require __DIR__ . '/routes/Support/support.php';
