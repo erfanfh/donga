@@ -14,6 +14,7 @@ class CreateTicketAction {
     {
         return auth()->user()->tickets()->create([
             'title' => $ticket['name'],
+            'status' => 1,
             'description' => $ticket['description'],
             'category' => $ticket['category'],
             'section' => $ticket['section'],
