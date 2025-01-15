@@ -40,25 +40,32 @@
         </div>
 
 
-        <div class="grid gap-6 mb-6 md:grid-cols-">
-            <label for="email"
-                   class="block mb-2 text-sm font-medium dark:text-white {{ $errors->has('new_password_confirmation') ? 'text-red-700' : 'text-gray-900' }}">
-                تکرار رمزعبور جدید</label>
-            @if($errors->has('new_password_confirmation'))
-                <input type="password" id="new_password_confirmation" name="new_password_confirmation"
-                       class="bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus-visible:ring-red-500 focus-visible:border-red-500 focus-visible:outline-none focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-red-700 dark:border-red-600 dark:placeholder-red-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500"
-                       />
-            @else
-                <input type="password" id="new_password_confirmation" name="new_password_confirmation"
-                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                       />
-            @endif
+        <div class="grid gap-6 mb-6 md:grid-cols-1">
+            <div>
+                <label for="email"
+                       class="block mb-2 text-sm font-medium dark:text-white {{ $errors->has('new_password_confirmation') ? 'text-red-700' : 'text-gray-900' }}">
+                    تکرار رمزعبور جدید</label>
+                @if($errors->has('new_password_confirmation'))
+                    <input type="password" id="new_password_confirmation" name="new_password_confirmation"
+                           class="bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus-visible:ring-red-500 focus-visible:border-red-500 focus-visible:outline-none focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-red-700 dark:border-red-600 dark:placeholder-red-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500"
+                    />
+                @else
+                    <input type="password" id="new_password_confirmation" name="new_password_confirmation"
+                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    />
+                @endif
+            </div>
         </div>
 
         <button type="submit" id="submit"
                 class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 mt-3">
             ذخیره
         </button>
+
+        <a href="{{ route('user.profile') }}"
+                class="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800 mt-3">
+            بازگشت
+        </a>
     </form>
 
     @if($errors->any())
