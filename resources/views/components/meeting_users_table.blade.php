@@ -3,7 +3,7 @@
         <div class="p-1.5 min-w-full inline-block align-middle">
             <div class="border rounded-lg overflow-hidden dark:border-neutral-700">
                 <table class="min-w-full divide-y divide-gray-200 dark:divide-neutral-700">
-                    <thead class="bg-gray-50 dark:bg-neutral-700">
+                    <thead class="bg-gray-100 dark:bg-neutral-700">
                     <tr>
                         <th scope="col"
                             class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-400">
@@ -45,7 +45,7 @@
                         </th>
                     </tr>
                     </thead>
-                    <tbody class="divide-y divide-gray-200 dark:divide-neutral-700">
+                    <tbody class="divide-y divide-gray-200 dark:divide-neutral-700 bg-white">
                     @foreach($meeting->persons as $person)
                         <tr>
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">

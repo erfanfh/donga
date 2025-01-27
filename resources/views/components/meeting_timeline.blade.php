@@ -1,4 +1,4 @@
-<ol class="relative border-s border-gray-200 dark:border-gray-700">
+<ol class="relative border-s border-gray-200 dark:border-gray-700 bg-white p-5 rounded-lg mt-10">
     @php
         use Illuminate\Support\Collection;
 
