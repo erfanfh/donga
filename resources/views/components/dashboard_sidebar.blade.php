@@ -6,7 +6,7 @@
 </button>
     <aside id="sidebar"
            class="fixed top-0 left-0 md:right-0 z-40 w-64 px-4 py-8 bg-white h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
-    <a href="#">
+    <a href="{{ route('dashboard') }}">
         <img class="w-auto h-[5rem]" src="{{ asset('images/logo-nobg.png') }}" alt="">
     </a>
 

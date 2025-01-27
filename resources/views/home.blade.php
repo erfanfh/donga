@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://cdn.tailwindcss.com"></script>
     <title>دنگا</title>
-    <link rel="icon" sizes="512x512" href="{{ asset('images/icons/icon-512x512.png') }}">
+    <link rel="icon" type="image/x-icon" href="{{ asset('images/logo-nobg.png') }}">
     <style>
         body {
             height: 100vh;
