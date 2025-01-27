@@ -23,7 +23,9 @@
 
         <x-meeting_users_table :meeting="$meeting"/>
 
-        <x-meeting_timeline :meeting="$meeting"/>
+        @if(!(empty($meeting->expenses->all()) and empty($meeting->payments->all())))
+            <x-meeting_timeline :meeting="$meeting"/>
+        @endif
     </section>
     <script src="{{ asset('js/MultiSelect.js') }}"></script>
     <script>
