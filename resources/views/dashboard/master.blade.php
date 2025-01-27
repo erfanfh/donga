@@ -9,7 +9,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
-<body class="bg-gray-100">
+<body class="bg-gray-100 pb-10 mt-8 md:mt-0 md:pb-0">
 
 <!-- Notifications -->
 @if(session()->has('notification-success'))
@@ -24,9 +24,10 @@
     <x-notification_warning/>
 @endif
 
-<section class="flex flex-row">
+<section class="flex flex-row justify-end">
     <x-dashboard_sidebar/>
-    <div class="p-8 w-5/6">
+    <x-mobile_navbar/>
+    <div class="p-8 w-full md:w-5/6">
         @yield('content')
     </div>
 </section>
