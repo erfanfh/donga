@@ -3,7 +3,7 @@
 @section('content')
     <section class="bg-white">
         <div class="lg:grid lg:min-h-screen lg:grid-cols-12">
-            <aside class="relative block h-16 lg:order-last lg:col-span-5 lg:h-full xl:col-span-6">
+            <aside class="hidden relative md:block h-16 lg:order-last lg:col-span-5 lg:h-full xl:col-span-6">
                 <img
                     alt=""
                     src="{{ asset('images/register.png') }}"

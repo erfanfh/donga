@@ -75,27 +75,27 @@
         </div>
     </div>
 
-    <div class="col-span-6">
-        <label for="MarketingAccept" class="flex gap-4">
-            <span class="text-sm text-gray-700">
-             می‌خواهم ایمیل‌هایی درباره رویدادها، به‌روزرسانی‌های محصول و اطلاعیه‌های شرکت دریافت کنم.
-            </span>
+{{--    <div class="col-span-6">--}}
+{{--        <label for="MarketingAccept" class="flex gap-4">--}}
+{{--            <span class="text-sm text-gray-700">--}}
+{{--             می‌خواهم ایمیل‌هایی درباره رویدادها، به‌روزرسانی‌های محصول و اطلاعیه‌های شرکت دریافت کنم.--}}
+{{--            </span>--}}
 
-            <input
-                type="checkbox"
-                id="MarketingAccept"
-                name="marketing_accept"
-                class="size-5 rounded-md border-gray-200 bg-white shadow-sm"
-            />
-        </label>
-    </div>
+{{--            <input--}}
+{{--                type="checkbox"--}}
+{{--                id="MarketingAccept"--}}
+{{--                name="marketing_accept"--}}
+{{--                class="size-5 rounded-md border-gray-200 bg-white shadow-sm"--}}
+{{--            />--}}
+{{--        </label>--}}
+{{--    </div>--}}
 
     <div class="col-span-6">
         <p class="text-sm text-gray-500">
             با ایجاد یک حساب کاربری، با
-            <a href="#" class="text-gray-700 underline"> شرایط و ضوابط </a>
+            <span class="text-gray-700 underline"> شرایط و ضوابط </span>
             و
-            <a href="#" class="text-gray-700 underline">سیاست حفظ حریم خصوصی</a>
+            <span class="text-gray-700 underline">سیاست حفظ حریم خصوصی</span>
             ما موافقت می کنید.
         </p>
     </div>

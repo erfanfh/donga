@@ -29,7 +29,7 @@ class AuthController extends Controller
         if ($validateLoginForm->execute($request)) {
             $request->session()->regenerate();
 
-            return redirect('/');
+            return redirect()->route('dashboard');
         }
 
         return redirect()->back()->with(['error' => 'ایمیل یا رمز عبور اشتباه است.']);
