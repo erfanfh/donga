@@ -68,7 +68,7 @@
 
                 <li>
                     <a class="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform rounded-md dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
-                       href="#">
+                       href="{{ route('meetings.index') }}">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                              class="bi bi-clock-history" viewBox="0 0 16 16">
                             <path

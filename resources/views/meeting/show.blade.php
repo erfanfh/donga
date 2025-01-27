@@ -55,7 +55,6 @@
         new MultiSelect(document.getElementById('user-multi-select'));
     </script>
     <script>
-        // Format the price input
         document.getElementById('price').addEventListener('input', function (e) {
             let input = e.target.value.replace(/\D/g, '');
             input = input.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -63,7 +62,6 @@
         });
     </script>
     <script>
-        // Set the price inout unformat
         document.getElementById('expenseForm').addEventListener('submit', function (e) {
             let inputField = document.getElementById('price');
             inputField.value = inputField.value.replace(/,/g, '');
