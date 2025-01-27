@@ -7,7 +7,24 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('title', 'دنگا')</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#000000">
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="PWA">
+    <link rel="icon" sizes="512x512" href="{{ public_path('images/icons/icon-512x512.png') }}">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="PWA">
+    <link rel="apple-touch-icon" href="{{ public_path('/images/icons/icon-512x512.png') }}">
+
+    <!-- Tile for Win8 -->
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/images/icons/icon-512x512.png">
 </head>
+@laravelPWA
 <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
 <body class="bg-gray-100 pb-10 mt-8 md:mt-0 md:pb-0">
 
@@ -31,5 +48,16 @@
         @yield('content')
     </div>
 </section>
+<script type="text/javascript">
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/serviceworker.js', {
+            scope: '.'
+        }).then(function (registration) {
+            console.log('Laravel PWA: ServiceWorker registration successful with scope: ', registration.scope);
+        }, function (err) {
+            console.log('Laravel PWA: ServiceWorker registration failed: ', err);
+        });
+    }
+</script>
 </body>
 </html>

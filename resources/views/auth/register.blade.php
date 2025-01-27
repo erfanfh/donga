@@ -16,7 +16,7 @@
             >
                 <div class="max-w-xl lg:max-w-3xl">
                     <a class="text-blue-600 flex justify-center" href="/">
-                        <img width="300" src="{{ asset('images/logo-nobg.png') }}" alt="لوگو دنگا">
+                        <img width="300" src="{{ asset('images/icon-72x72.png') }}" alt="لوگو دنگا">
                     </a>
 
                     <h1 class="mt-6 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl">

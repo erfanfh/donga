@@ -7,7 +7,7 @@
     <aside id="sidebar"
            class="fixed top-0 left-0 md:right-0 z-40 w-64 px-4 py-8 bg-white h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
     <a href="#">
-        <img class="w-auto h-6 sm:h-7" src="{{ asset('images/logo-nobg.png') }}" alt="">
+        <img class="w-auto h-6 sm:h-7" src="{{ asset('images/icon-72x72.png') }}" alt="">
     </a>
 
     <div class="flex flex-col justify-between flex-1 mt-6">

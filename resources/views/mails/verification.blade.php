@@ -48,7 +48,7 @@
 </head>
 <body>
 <div class="email-container">
-    <img src="{{ public_path('images/logo-nobg.png') }}" alt="لوگو" class="logo">
+    <img src="{{ public_path('images/icon-72x72.png') }}" alt="لوگو" class="logo">
     <div class="title">خوش آمدید!</div>
     <div class="message">
         از ثبت‌ نام شما در دنگا سپاسگزاریم. برای تأیید حساب کاربری خود، کد زیر را وارد کنید.
