@@ -56,7 +56,7 @@
             </div>
             <div class="flex items-end justify-start">
                 <a href="{{ route("user.change-password") }}"
-                        class="text-center focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 w-1/4">
+                        class="text-center focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 md:w-1/4">
                     تغییر رمز عبور
                 </a>
             </div>
