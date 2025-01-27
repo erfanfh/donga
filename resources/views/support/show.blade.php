@@ -2,7 +2,7 @@
 
 @section('title', 'پشتیبانی')
 @section('content')
-<div class="grid grid-cols-12 gap-10">
+<div class="flex flex-col-reverse md:grid md:grid-cols-12 gap-10">
     <div class="grid col-span-3 grid-cols-4 gap-3">
         <div id="accordion-open-1" data-accordion="open" class="col-span-4">
             <h2 id="accordion-open-1-heading-1">
