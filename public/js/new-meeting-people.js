@@ -2,7 +2,7 @@ const input = document.getElementById('tag-input');
 const container = document.getElementById('tag-container');
 
 input.addEventListener('keydown', (event) => {
-    if (event.key === 'Tab' && input.value.trim() !== '') {
+    if ((event.key === 'Tab' || event.key === 'Enter') && input.value.trim() !== '') {
         event.preventDefault();
         createTag(input.value.trim());
         input.value = '';
