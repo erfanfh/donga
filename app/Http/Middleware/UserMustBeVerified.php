@@ -20,9 +20,7 @@ class UserMustBeVerified
      */
     public function handle(Request $request, Closure $next): mixed
     {
-        if (! $request->user() ||
-            ($request->user() instanceof MustVerifyEmail &&
-                ! $request->user()->hasVerifiedEmail())) {
+        if (! $request->user() || (! $request->user()->hasVerifiedEmail())) {
             return Redirect::guest(URL::route('verify'));
         }
 
