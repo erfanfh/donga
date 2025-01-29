@@ -95,7 +95,7 @@ class AuthController extends Controller
         {
             $verifyUser->execute();
 
-            return redirect('/');
+            return redirect()->route('dashboard');
 
         } else {
             return redirect()->route('verify')->with('error', 'کد تایید وارد شده معتبر نمی باشد');
